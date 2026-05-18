@@ -1,0 +1,92 @@
+/* Global reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #4f46e5, #9333ea);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Main container */
+.quiz-app {
+  width: 420px;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Question section */
+.question-section h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.question-section p {
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+/* Options */
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.options button {
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: #f3f4f6;
+  cursor: pointer;
+  font-size: 15px;
+  transition: all 0.2s ease;
+}
+
+.options button:hover {
+  background: #6366f1;
+  color: white;
+  transform: scale(1.03);
+}
+
+/* Timer */
+.timer {
+  margin-top: 15px;
+  font-weight: bold;
+  color: #ef4444;
+  text-align: right;
+}
+
+/* Score section */
+.score-section {
+  text-align: center;
+}
+
+.score-section h2 {
+  margin-bottom: 15px;
+  color: #111;
+}
+
+.score-section button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background: #22c55e;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.score-section button:hover {
+  background: #16a34a;
+}

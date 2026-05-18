@@ -1,0 +1,57 @@
+[
+    {
+    "id": 1,
+    "question": "What is the capital of Sri Lanka?",
+    "options": [
+            "Kandy",
+            "Colombo",
+            "Galle",
+            "Sri Jayawardenepura Kotte"
+        ],
+    "answer": "Sri Jayawardenepura Kotte"
+    },
+    {
+    "id": 2,
+    "question": "Which language is used for React?",
+    "options": [
+            "Python",
+            "Java",
+            "JavaScript",
+            "C++"
+        ],
+    "answer": "JavaScript"
+    },
+    {
+    "id": 3,
+    "question": "What does CSS stand for?",
+    "options": [
+            "Computer Style Sheets",
+            "Creative Style System",
+            "Cascading Style Sheets",
+            "Colorful Style Syntax"
+        ],
+    "answer": "Cascading Style Sheets"
+    },
+    {
+    "id": 4,
+    "question": "Which hook is used for state in React?",
+    "options": [
+            "useEffect",
+            "useState",
+            "useRef",
+            "useMemo"
+        ],
+    "answer": "useState"
+    },
+    {
+    "id": 5,
+    "question": "Which company developed React?",
+    "options": [
+            "Google",
+            "Microsoft",
+            "Facebook (Meta)",
+            "Apple"
+        ],
+    "answer": "Facebook (Meta)"
+    }
+]
