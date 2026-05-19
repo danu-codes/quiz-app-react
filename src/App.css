@@ -8,7 +8,7 @@
 
 body {
   background: linear-gradient(135deg, #4f46e5, #9333ea);
-  height: 100vh;
+  min-height: 100dvh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,81 +17,86 @@ body {
 
 /* Main container */
 .quiz-app {
-  width: 420px;
+  max-width: 700px;
   background: #ffffff;
   max-width: 95%;
   border-radius: 16px;
-  padding: 25px;
+  padding: clamp(20px, 4vw, 40px);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
-.start-section{
+.start-section {
   text-align: center;
 }
 
-.start-section h1{
+.start-section h1 {
   margin-bottom: 20px;
   color: #333;
+  font-size: clamp(22px, 3vw, 34px);
 }
 
-.start-btn{
-  padding: 12px 24px;
+.start-btn {
+  padding: clamp(10px, 2vw, 14px) clamp(20px, 3vw, 32px);
   border: none;
   border-radius: 10px;
   background: #6366f1;
   color: white;
-  font-size: 16px;
+  font-size: clamp(15px, 1.5vw, 18px);
   cursor: pointer;
   transition: 0.3s;
 }
 
-.start-btn:hover{
+.start-btn:hover {
   background: #4f46e5;
 }
 
 /* Question section */
 .question-section h2 {
-  font-size: 20px;
+  font-size: clamp(18px, 2.5vw, 26px);
   margin-bottom: 10px;
   color: #333;
 }
 
 .question-section p {
-  font-size: 16px;
+  font-size: clamp(14px, 1.5vw, 18px);
   margin-bottom: 20px;
   color: #555;
+  line-height: 1.6;
 }
 
 /* Options */
 .options {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  /* single column on mobile, 2 columns on wider screens */
+  grid-template-columns: 1fr;
   gap: 12px;
 }
 
 .options button {
-  padding: 12px;
+  padding: clamp(10px, 1.5vw, 14px) clamp(12px, 2vw, 18px);
   border: none;
   border-radius: 10px;
   background: #f3f4f6;
   cursor: pointer;
-  font-size: 15px;
+  font-size: clamp(14px, 1.4vw, 16px);
   transition: all 0.2s ease;
+  text-align: center;
+  word-break: break-word;
 }
 
 .options button:hover {
   background: #6366f1;
   color: white;
-  transform: scale(1.03);
+  transform: scale(1.02);
 }
 
 /* Timer */
 .timer {
-  margin-top: 15px;
+  margin-top: 18px;
   font-weight: bold;
   color: #ef4444;
   text-align: right;
-   font-size: 14px;
+  font-size: clamp(13px, 1.2vw, 16px);
 }
 
 /* Score section */
@@ -102,51 +107,45 @@ body {
 .score-section h2 {
   margin-bottom: 15px;
   color: #111;
+  font-size: clamp(18px, 2.5vw, 28px);
 }
 
 .start-btn,
 .score-section button {
-  padding: 10px 20px;
+  padding: clamp(10px, 1.5vw, 13px) clamp(20px, 3vw, 30px);
   border: none;
   border-radius: 8px;
   background: #22c55e;
   color: white;
+  font-size: clamp(14px, 1.4vw, 17px);
   cursor: pointer;
   transition: 0.3s;
 }
+
 .start-btn:hover,
 .score-section button:hover {
   background: #16a34a;
 }
 
-@media (max-width: 600px) {
+/* tablet+ — 2-column answer grid */
+@media (min-width: 600px) {
+  .options {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* mobile — full-width buttons, tighter layout */
+@media (max-width: 480px) {
   .quiz-app {
-    padding: 18px;
     border-radius: 12px;
   }
 
-  .question-section h2 {
-    font-size: 18px;
-  }
-
-  .question-section p {
-    font-size: 14px;
-  }
-
-  .options button {
-    font-size: 14px;
-    padding: 10px;
-  }
-
-  .timer {
-    font-size: 13px;
-  }
-
-  .start-btn {
-    width: 100%;
-  }
-
+  .start-btn,
   .score-section button {
     width: 100%;
+  }
+
+  .options {
+    grid-template-columns: 1fr;
   }
 }
