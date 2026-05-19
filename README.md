@@ -35,6 +35,6 @@ It includes a timer, score tracking, and dynamic question rendering.
 ## 🎮 Demo
 
 Live Demo:  
-[https://your-demo-link-here.com](https://danu-codes.github.io/quiz-app-react/)
+https://danu-codes.github.io/quiz-app-react/
 
 ---
