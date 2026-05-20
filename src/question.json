@@ -1,57 +1,114 @@
+
 [
-    {
+  {
     "id": 1,
-    "question": "What is the capital of Sri Lanka?",
+    "question": "Which planet is known as the Red Planet?",
     "options": [
-            "Kandy",
-            "Colombo",
-            "Galle",
-            "Sri Jayawardenepura Kotte"
-        ],
-    "answer": "Sri Jayawardenepura Kotte"
-    },
-    {
+      "Earth",
+      "Mars",
+      "Jupiter",
+      "Venus"
+    ],
+    "answer": "Mars"
+  },
+  {
     "id": 2,
-    "question": "Which language is used for React?",
+    "question": "Who wrote the play 'Romeo and Juliet'?",
     "options": [
-            "Python",
-            "Java",
-            "JavaScript",
-            "C++"
-        ],
-    "answer": "JavaScript"
-    },
-    {
+      "William Shakespeare",
+      "Charles Dickens",
+      "Mark Twain",
+      "Leo Tolstoy"
+    ],
+    "answer": "William Shakespeare"
+  },
+  {
     "id": 3,
-    "question": "What does CSS stand for?",
+    "question": "What is the largest ocean on Earth?",
     "options": [
-            "Computer Style Sheets",
-            "Creative Style System",
-            "Cascading Style Sheets",
-            "Colorful Style Syntax"
-        ],
-    "answer": "Cascading Style Sheets"
-    },
-    {
+      "Indian Ocean",
+      "Atlantic Ocean",
+      "Pacific Ocean",
+      "Arctic Ocean"
+    ],
+    "answer": "Pacific Ocean"
+  },
+  {
     "id": 4,
-    "question": "Which hook is used for state in React?",
+    "question": "Which country is famous for the Eiffel Tower?",
     "options": [
-            "useEffect",
-            "useState",
-            "useRef",
-            "useMemo"
-        ],
-    "answer": "useState"
-    },
-    {
+      "Italy",
+      "France",
+      "Germany",
+      "Spain"
+    ],
+    "answer": "France"
+  },
+  {
     "id": 5,
-    "question": "Which company developed React?",
+    "question": "How many continents are there in the world?",
     "options": [
-            "Google",
-            "Microsoft",
-            "Facebook (Meta)",
-            "Apple"
-        ],
-    "answer": "Facebook (Meta)"
-    }
+      "5",
+      "6",
+      "7",
+      "8"
+    ],
+    "answer": "7"
+  },
+  {
+    "id": 6,
+    "question": "What is the hardest natural substance on Earth?",
+    "options": [
+      "Gold",
+      "Diamond",
+      "Iron",
+      "Silver"
+    ],
+    "answer": "Diamond"
+  },
+  {
+    "id": 7,
+    "question": "Which animal is known as the King of the Jungle?",
+    "options": [
+      "Tiger",
+      "Elephant",
+      "Lion",
+      "Leopard"
+    ],
+    "answer": "Lion"
+  },
+  {
+    "id": 8,
+    "question": "Which gas do plants absorb from the atmosphere?",
+    "options": [
+      "Oxygen",
+      "Nitrogen",
+      "Carbon Dioxide",
+      "Hydrogen"
+    ],
+    "answer": "Carbon Dioxide"
+  },
+  {
+    "id": 9,
+    "question": "Which is the smallest prime number?",
+    "options": [
+      "0",
+      "1",
+      "2",
+      "3"
+    ],
+    "answer": "2"
+  },
+  {
+    "id": 10,
+    "question": "Which country hosted the 2022 FIFA World Cup?",
+    "options": [
+      "Brazil",
+      "Qatar",
+      "Russia",
+      "Germany"
+    ],
+    "answer": "Qatar"
+  }
 ]
+
