@@ -18,8 +18,9 @@ function App() {
   // Start quiz
   const handleStartQuiz = () => {
     const shuffledQuestions = shuffleQuestions(QuestionData);
+    const selectedQuestions = shuffledQuestions.slice(0, 10);
 
-    setQuestions(shuffledQuestions);
+    setQuestions(selectedQuestions);
     setStartQuiz(true);
     setCurrentQuestion(0);
     setScore(0);
