@@ -1,114 +1,422 @@
-
 [
   {
     "id": 1,
     "question": "Which planet is known as the Red Planet?",
-    "options": [
-      "Earth",
-      "Mars",
-      "Jupiter",
-      "Venus"
-    ],
+    "options": ["Earth", "Mars", "Jupiter", "Venus"],
     "answer": "Mars"
   },
   {
     "id": 2,
-    "question": "Who wrote the play 'Romeo and Juliet'?",
-    "options": [
-      "William Shakespeare",
-      "Charles Dickens",
-      "Mark Twain",
-      "Leo Tolstoy"
-    ],
-    "answer": "William Shakespeare"
+    "question": "What is the capital city of Japan?",
+    "options": ["Beijing", "Tokyo", "Seoul", "Bangkok"],
+    "answer": "Tokyo"
   },
   {
     "id": 3,
-    "question": "What is the largest ocean on Earth?",
-    "options": [
-      "Indian Ocean",
-      "Atlantic Ocean",
-      "Pacific Ocean",
-      "Arctic Ocean"
-    ],
-    "answer": "Pacific Ocean"
+    "question": "Who invented the telephone?",
+    "options": ["Nikola Tesla", "Alexander Graham Bell", "Thomas Edison", "Albert Einstein"],
+    "answer": "Alexander Graham Bell"
   },
   {
     "id": 4,
-    "question": "Which country is famous for the Eiffel Tower?",
-    "options": [
-      "Italy",
-      "France",
-      "Germany",
-      "Spain"
-    ],
-    "answer": "France"
+    "question": "Which ocean is the largest?",
+    "options": ["Indian Ocean", "Atlantic Ocean", "Pacific Ocean", "Arctic Ocean"],
+    "answer": "Pacific Ocean"
   },
   {
     "id": 5,
-    "question": "How many continents are there in the world?",
-    "options": [
-      "5",
-      "6",
-      "7",
-      "8"
-    ],
-    "answer": "7"
+    "question": "Which country is famous for the Eiffel Tower?",
+    "options": ["Italy", "France", "Germany", "Spain"],
+    "answer": "France"
   },
   {
     "id": 6,
-    "question": "What is the hardest natural substance on Earth?",
-    "options": [
-      "Gold",
-      "Diamond",
-      "Iron",
-      "Silver"
-    ],
-    "answer": "Diamond"
+    "question": "How many continents are there in the world?",
+    "options": ["5", "6", "7", "8"],
+    "answer": "7"
   },
   {
     "id": 7,
-    "question": "Which animal is known as the King of the Jungle?",
-    "options": [
-      "Tiger",
-      "Elephant",
-      "Lion",
-      "Leopard"
-    ],
-    "answer": "Lion"
+    "question": "What is the hardest natural substance?",
+    "options": ["Gold", "Diamond", "Iron", "Silver"],
+    "answer": "Diamond"
   },
   {
     "id": 8,
-    "question": "Which gas do plants absorb from the atmosphere?",
-    "options": [
-      "Oxygen",
-      "Nitrogen",
-      "Carbon Dioxide",
-      "Hydrogen"
-    ],
-    "answer": "Carbon Dioxide"
+    "question": "Which animal is called the King of the Jungle?",
+    "options": ["Tiger", "Lion", "Elephant", "Leopard"],
+    "answer": "Lion"
   },
   {
     "id": 9,
-    "question": "Which is the smallest prime number?",
-    "options": [
-      "0",
-      "1",
-      "2",
-      "3"
-    ],
-    "answer": "2"
+    "question": "Which gas do plants absorb?",
+    "options": ["Oxygen", "Hydrogen", "Carbon Dioxide", "Nitrogen"],
+    "answer": "Carbon Dioxide"
   },
   {
     "id": 10,
+    "question": "Which is the smallest prime number?",
+    "options": ["0", "1", "2", "3"],
+    "answer": "2"
+  },
+  {
+    "id": 11,
+    "question": "Who painted the Mona Lisa?",
+    "options": ["Van Gogh", "Picasso", "Leonardo da Vinci", "Michelangelo"],
+    "answer": "Leonardo da Vinci"
+  },
+  {
+    "id": 12,
+    "question": "What is the boiling point of water?",
+    "options": ["90°C", "95°C", "100°C", "110°C"],
+    "answer": "100°C"
+  },
+  {
+    "id": 13,
     "question": "Which country hosted the 2022 FIFA World Cup?",
-    "options": [
-      "Brazil",
-      "Qatar",
-      "Russia",
-      "Germany"
-    ],
+    "options": ["Brazil", "Russia", "Qatar", "Germany"],
     "answer": "Qatar"
+  },
+  {
+    "id": 14,
+    "question": "What is the tallest mountain in the world?",
+    "options": ["K2", "Mount Everest", "Kilimanjaro", "Alps"],
+    "answer": "Mount Everest"
+  },
+  {
+    "id": 15,
+    "question": "Which is the fastest land animal?",
+    "options": ["Tiger", "Horse", "Leopard", "Cheetah"],
+    "answer": "Cheetah"
+  },
+  {
+    "id": 16,
+    "question": "Which planet is closest to the Sun?",
+    "options": ["Venus", "Mercury", "Earth", "Mars"],
+    "answer": "Mercury"
+  },
+  {
+    "id": 17,
+    "question": "Who discovered gravity?",
+    "options": ["Newton", "Einstein", "Galileo", "Tesla"],
+    "answer": "Newton"
+  },
+  {
+    "id": 18,
+    "question": "What is the largest mammal?",
+    "options": ["Elephant", "Blue Whale", "Shark", "Giraffe"],
+    "answer": "Blue Whale"
+  },
+  {
+    "id": 19,
+    "question": "Which country is known as the Land of the Rising Sun?",
+    "options": ["China", "Thailand", "Japan", "Korea"],
+    "answer": "Japan"
+  },
+  {
+    "id": 20,
+    "question": "What is the currency of the USA?",
+    "options": ["Euro", "Dollar", "Yen", "Pound"],
+    "answer": "Dollar"
+  },
+  {
+    "id": 21,
+    "question": "Which organ pumps blood in the human body?",
+    "options": ["Brain", "Lungs", "Heart", "Kidney"],
+    "answer": "Heart"
+  },
+  {
+    "id": 22,
+    "question": "Who wrote 'Harry Potter'?",
+    "options": ["J.K. Rowling", "Shakespeare", "Mark Twain", "Tolstoy"],
+    "answer": "J.K. Rowling"
+  },
+  {
+    "id": 23,
+    "question": "What is the national sport of Sri Lanka?",
+    "options": ["Football", "Volleyball", "Cricket", "Rugby"],
+    "answer": "Volleyball"
+  },
+  {
+    "id": 24,
+    "question": "Which is the largest desert in the world?",
+    "options": ["Sahara", "Arabian", "Gobi", "Kalahari"],
+    "answer": "Sahara"
+  },
+  {
+    "id": 25,
+    "question": "What is H2O commonly known as?",
+    "options": ["Salt", "Water", "Oxygen", "Hydrogen"],
+    "answer": "Water"
+  },
+  {
+    "id": 26,
+    "question": "Which bird is a symbol of peace?",
+    "options": ["Crow", "Parrot", "Dove", "Eagle"],
+    "answer": "Dove"
+  },
+  {
+    "id": 27,
+    "question": "Which is the smallest continent?",
+    "options": ["Europe", "Australia", "Antarctica", "Africa"],
+    "answer": "Australia"
+  },
+  {
+    "id": 28,
+    "question": "Who was the first man on the Moon?",
+    "options": ["Buzz Aldrin", "Yuri Gagarin", "Neil Armstrong", "Michael Collins"],
+    "answer": "Neil Armstrong"
+  },
+  {
+    "id": 29,
+    "question": "Which is the longest river in the world?",
+    "options": ["Amazon", "Yangtze", "Nile", "Mississippi"],
+    "answer": "Nile"
+  },
+  {
+    "id": 30,
+    "question": "Which country gifted the Statue of Liberty to the USA?",
+    "options": ["France", "Germany", "Canada", "Italy"],
+    "answer": "France"
+  },
+  {
+    "id": 31,
+    "question": "Which vitamin is produced by sunlight?",
+    "options": ["Vitamin A", "Vitamin B", "Vitamin C", "Vitamin D"],
+    "answer": "Vitamin D"
+  },
+  {
+    "id": 32,
+    "question": "Which is the largest country in the world?",
+    "options": ["USA", "China", "Russia", "Canada"],
+    "answer": "Russia"
+  },
+  {
+    "id": 33,
+    "question": "Which blood group is known as universal donor?",
+    "options": ["A", "B", "AB", "O Negative"],
+    "answer": "O Negative"
+  },
+  {
+    "id": 34,
+    "question": "Which instrument measures temperature?",
+    "options": ["Barometer", "Thermometer", "Speedometer", "Altimeter"],
+    "answer": "Thermometer"
+  },
+  {
+    "id": 35,
+    "question": "Which country is famous for pizza?",
+    "options": ["France", "Italy", "Mexico", "India"],
+    "answer": "Italy"
+  },
+  {
+    "id": 36,
+    "question": "What is the square root of 64?",
+    "options": ["6", "7", "8", "9"],
+    "answer": "8"
+  },
+  {
+    "id": 37,
+    "question": "Which is the largest planet in our solar system?",
+    "options": ["Earth", "Saturn", "Jupiter", "Neptune"],
+    "answer": "Jupiter"
+  },
+  {
+    "id": 38,
+    "question": "Which country has the Great Wall?",
+    "options": ["India", "China", "Japan", "Korea"],
+    "answer": "China"
+  },
+  {
+    "id": 39,
+    "question": "What is the main language spoken in Brazil?",
+    "options": ["Spanish", "Portuguese", "English", "French"],
+    "answer": "Portuguese"
+  },
+  {
+    "id": 40,
+    "question": "Who is known as the Father of Computers?",
+    "options": ["Bill Gates", "Charles Babbage", "Steve Jobs", "Alan Turing"],
+    "answer": "Charles Babbage"
+  },
+  {
+    "id": 41,
+    "question": "Which metal is liquid at room temperature?",
+    "options": ["Gold", "Silver", "Mercury", "Iron"],
+    "answer": "Mercury"
+  },
+  {
+    "id": 42,
+    "question": "How many players are there in a football team?",
+    "options": ["9", "10", "11", "12"],
+    "answer": "11"
+  },
+  {
+    "id": 43,
+    "question": "Which country is called the Land of Kangaroos?",
+    "options": ["India", "Australia", "Canada", "Brazil"],
+    "answer": "Australia"
+  },
+  {
+    "id": 44,
+    "question": "What is the chemical symbol for gold?",
+    "options": ["Ag", "Go", "Au", "Gd"],
+    "answer": "Au"
+  },
+  {
+    "id": 45,
+    "question": "Which is the largest rainforest in the world?",
+    "options": ["Congo", "Amazon", "Daintree", "Sundarbans"],
+    "answer": "Amazon"
+  },
+  {
+    "id": 46,
+    "question": "Who wrote 'Romeo and Juliet'?",
+    "options": ["Charles Dickens", "William Shakespeare", "Tolstoy", "Mark Twain"],
+    "answer": "William Shakespeare"
+  },
+  {
+    "id": 47,
+    "question": "What is the capital of Canada?",
+    "options": ["Toronto", "Ottawa", "Vancouver", "Montreal"],
+    "answer": "Ottawa"
+  },
+  {
+    "id": 48,
+    "question": "Which planet has rings around it?",
+    "options": ["Mars", "Venus", "Saturn", "Mercury"],
+    "answer": "Saturn"
+  },
+  {
+    "id": 49,
+    "question": "Which animal is the tallest in the world?",
+    "options": ["Elephant", "Camel", "Horse", "Giraffe"],
+    "answer": "Giraffe"
+  },
+  {
+    "id": 50,
+    "question": "Which festival is known as the Festival of Lights?",
+    "options": ["Christmas", "Eid", "Diwali", "Holi"],
+    "answer": "Diwali"
+  },
+  {
+    "id": 51,
+    "question": "Which country invented paper?",
+    "options": ["India", "China", "Egypt", "Japan"],
+    "answer": "China"
+  },
+  {
+    "id": 52,
+    "question": "How many colors are there in a rainbow?",
+    "options": ["5", "6", "7", "8"],
+    "answer": "7"
+  },
+  {
+    "id": 53,
+    "question": "Which is the national flower of Sri Lanka?",
+    "options": ["Rose", "Blue Water Lily", "Lotus", "Sunflower"],
+    "answer": "Blue Water Lily"
+  },
+  {
+    "id": 54,
+    "question": "Which device is used to measure earthquakes?",
+    "options": ["Thermometer", "Seismograph", "Barometer", "Altimeter"],
+    "answer": "Seismograph"
+  },
+  {
+    "id": 55,
+    "question": "Which country is famous for sushi?",
+    "options": ["China", "Japan", "Thailand", "Korea"],
+    "answer": "Japan"
+  },
+  {
+    "id": 56,
+    "question": "What is the currency of the United Kingdom?",
+    "options": ["Dollar", "Euro", "Pound Sterling", "Yen"],
+    "answer": "Pound Sterling"
+  },
+  {
+    "id": 57,
+    "question": "Which is the largest island in the world?",
+    "options": ["Greenland", "Madagascar", "Sri Lanka", "Australia"],
+    "answer": "Greenland"
+  },
+  {
+    "id": 58,
+    "question": "Which country is known for pyramids?",
+    "options": ["India", "Mexico", "Egypt", "Greece"],
+    "answer": "Egypt"
+  },
+  {
+    "id": 59,
+    "question": "What is the primary source of energy for Earth?",
+    "options": ["Moon", "Wind", "Sun", "Water"],
+    "answer": "Sun"
+  },
+  {
+    "id": 60,
+    "question": "Who invented the light bulb?",
+    "options": ["Newton", "Tesla", "Thomas Edison", "Einstein"],
+    "answer": "Thomas Edison"
+  },
+  {
+    "id": 61,
+    "question": "Which is the coldest continent?",
+    "options": ["Europe", "Antarctica", "Asia", "Australia"],
+    "answer": "Antarctica"
+  },
+  {
+    "id": 62,
+    "question": "Which sport uses a shuttlecock?",
+    "options": ["Tennis", "Cricket", "Badminton", "Football"],
+    "answer": "Badminton"
+  },
+  {
+    "id": 63,
+    "question": "What is the largest bone in the human body?",
+    "options": ["Skull", "Femur", "Rib", "Spine"],
+    "answer": "Femur"
+  },
+  {
+    "id": 64,
+    "question": "Which country is known as the Land of Thunder Dragon?",
+    "options": ["Nepal", "Bhutan", "India", "China"],
+    "answer": "Bhutan"
+  },
+  {
+    "id": 65,
+    "question": "Which language has the most native speakers?",
+    "options": ["English", "Spanish", "Mandarin Chinese", "Hindi"],
+    "answer": "Mandarin Chinese"
+  },
+  {
+    "id": 66,
+    "question": "Which is the largest organ in the human body?",
+    "options": ["Heart", "Brain", "Skin", "Liver"],
+    "answer": "Skin"
+  },
+  {
+    "id": 67,
+    "question": "Which city is known as the Big Apple?",
+    "options": ["Los Angeles", "New York", "Chicago", "Miami"],
+    "answer": "New York"
+  },
+  {
+    "id": 68,
+    "question": "What is the national animal of Sri Lanka?",
+    "options": ["Elephant", "Lion", "Leopard", "Peacock"],
+    "answer": "Lion"
+  },
+  {
+    "id": 69,
+    "question": "Which scientist developed the theory of relativity?",
+    "options": ["Newton", "Einstein", "Galileo", "Darwin"],
+    "answer": "Einstein"
+  },
+  {
+    "id": 70,
+    "question": "Which country is famous for maple syrup?",
+    "options": ["Canada", "USA", "Sweden", "Norway"],
+    "answer": "Canada"
   }
 ]
-
