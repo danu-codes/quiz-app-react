@@ -75,7 +75,7 @@ quiz-app-react/
 
 ```
 <img width="988" height="642" alt="image" src="https://github.com/user-attachments/assets/5574fc08-5c57-4707-8f12-3e174098eefb" />
-<img width="1297" height="840" alt="image" src="https://github.com/user-attachments/assets/3eeae08f-68d8-42eb-8b07-48819d6abf8f" />
+<img width="1297" height="840" alt="image" src="https://github.com/user-attachments/assets/a2940f6d-34f5-48fb-a704-6b220a3c82a1" />
 
 ```
 
