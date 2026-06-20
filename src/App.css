@@ -149,3 +149,31 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+.review-section {
+  margin-top: 25px;
+  text-align: left;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.review-section h3 {
+  margin-bottom: 15px;
+}
+
+.review-card {
+  padding: 15px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  border-left: 6px solid;
+}
+
+.review-card.correct {
+  background: #ecfdf5;
+  border-color: #22c55e;
+}
+
+.review-card.wrong {
+  background: #fef2f2;
+  border-color: #ef4444;
+}
