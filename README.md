@@ -1,106 +1,228 @@
-🧠 QuizMaster — React Quiz App
-A modern, responsive multiple-choice quiz application built with React 19 and Vite 8. Challenge yourself with general-knowledge questions, race against the clock, review your answers, and track your recent scores.
-✨ Features
-70 questions included in the question bank; a random selection is used for each quiz.
-Flexible quiz length: choose 5, 10, 15, or 20 questions.
-Custom time limits: choose 10, 15, 20, or 30 seconds per question.
-Fair question randomization using the Fisher–Yates shuffle algorithm.
-Countdown timer based on wall-clock deadlines rather than relying only on interval counts.
-Instant answer feedback showing correct and incorrect choices before moving on.
-Detailed results with accuracy, correct, incorrect, timed-out counts, and elapsed time.
-Answer review after each quiz.
-Recent attempt history saved in the browser using `localStorage` (up to eight results stored; the latest three shown on the welcome screen).
-Responsive layout for desktop, tablet, and mobile screens.
-Basic accessibility enhancements including labeled controls and quiz progress announcements.
-🛠️ Tech Stack
-React 19
-JavaScript (ES modules and JSX)
-Vite 8
-CSS3
-Browser `localStorage`
-This is a frontend-only application. No backend, login, or database server is required.
-🚀 Getting Started
-Prerequisites
-Node.js and npm installed; use a Node.js version compatible with Vite 8 (Node.js 20.19+ or 22.12+).
-A modern web browser.
-Installation
-```bash
-# Clone your repository
- git clone https://github.com/danu-codes/quiz-app-react.git
+# 🧠 QuizMaster — Interactive React Quiz App
 
-# Open the project directory
-cd quiz-app-react
+A modern, responsive, and interactive quiz application built using **React.js, Vite, and CSS3**.
 
-# Install dependencies
-npm install
+QuizMaster allows users to test their knowledge through randomized multiple-choice questions, configurable time limits, instant answer feedback, and detailed performance reports.
 
-# Start the development server
-npm run dev
-```
-Open the local URL printed in your terminal (typically `http://localhost:5173`).
-If you downloaded the project ZIP instead of cloning, extract it and run `npm install` and `npm run dev` inside the extracted `quizmaster-react` directory.
-🎮 How to Play
-On the welcome screen, choose the number of questions and time limit.
-Click Start Quiz.
-Select one of the four answers before the timer expires.
-See brief feedback; the next question loads automatically.
-After the final question, view your score, accuracy, time, and answer review.
-Choose Try Again to begin a new randomized quiz or Home to change settings and see recent attempts.
-Timed-out questions are tracked separately from incorrect answers.
-📁 Project Structure
+## 🚀 Features
+
+- 🎯 **Randomized Questions** — Questions are shuffled to provide a different quiz experience each time.
+- ⏱️ **Countdown Timer** — Each question has a configurable time limit.
+- ⚙️ **Quiz Customization** — Choose the number of questions and time per question.
+- ✅ **Instant Answer Feedback** — See whether your selected answer is correct or incorrect.
+- 📊 **Performance Analysis** — View your score, accuracy percentage, and total time taken.
+- 📝 **Answer Review** — Review your answers alongside the correct answers.
+- 📈 **Quiz History** — Recent quiz results are stored locally in the browser.
+- 🔄 **Restart Quiz** — Start a new quiz with randomized questions.
+- 📱 **Responsive Design** — Optimized for desktops, tablets, and mobile devices.
+- 🎨 **Modern UI** — Clean layouts, smooth transitions, and interactive answer cards.
+
+## 🛠️ Technologies Used
+
+| Technology | Purpose |
+|---|---|
+| React.js 19 | Frontend UI and state management |
+| Vite 8 | Development server and build tool |
+| JavaScript (ES6+) | Quiz logic and functionality |
+| CSS3 | Styling, responsive layouts, and animations |
+| HTML5 | Application structure |
+| LocalStorage | Saving recent quiz results |
+| Git & GitHub | Version control and project hosting |
+
+## 📂 Project Structure
+
 ```text
 quizmaster-react/
-├── index.html           # HTML entry point
-├── package.json         # Scripts and dependencies
-├── vite.config.js       # Vite settings and GitHub Pages base path
-├── README.md            # Documentation
-└── src/
-    ├── main.jsx         # React application entry point
-    ├── App.jsx          # Quiz logic and UI screens
-    ├── App.css          # Responsive styles
-    └── question.json    # Multiple-choice question bank
+│
+├── src/
+│   ├── App.jsx
+│   ├── App.css
+│   ├── main.jsx
+│   └── question.json
+│
+├── index.html
+├── vite.config.js
+├── package.json
+└── README.md
 ```
-📜 Available Commands
-Command	Description
-`npm run dev`	Start the local development server
-`npm run build`	Create a production build in `dist/`
-`npm run preview`	Preview the production build locally
-`npm run deploy`	Build for GitHub Pages and publish `dist/` to the `gh-pages` branch
-🌐 Deploying to GitHub Pages
-The provided `vite.config.js` sets the base URL to `/quiz-app-react/` when running the deployment build. That path must match your GitHub repository name.
-Push this project to a GitHub repository named `quiz-app-react`.
-Ensure the repository remote and GitHub authentication are configured.
-Run:
+
+## ⚙️ Installation and Setup
+
+### 1. Clone the Repository
+
 ```bash
-   npm install
-   npm run deploy
-   ```
-In GitHub, open Settings → Pages and configure Deploy from a branch, selecting the `gh-pages` branch and `/ (root)` if necessary.
-Once GitHub Pages publishes the site, it should be available at:
-`https://danu-codes.github.io/quiz-app-react/`
-> **Using a different repository name?** Update the `/quiz-app-react/` path in `vite.config.js` before deploying. `npm run build` still uses `/` for ordinary hosting; `npm run deploy` enables the GitHub Pages-specific path.
-🧩 Customizing Questions
-Edit `src/question.json` to add or modify the question bank. Each entry should include a unique `id`, a `question`, four `options`, and an `answer` matching one of the options.
-Example:
+git clone https://github.com/danu-codes/quiz-app-react.git
+```
+
+### 2. Navigate to the Project Directory
+
+```bash
+cd quiz-app-react
+```
+
+### 3. Install Dependencies
+
+Make sure Node.js and npm are installed.
+
+```bash
+npm install
+```
+
+### 4. Start the Development Server
+
+```bash
+npm run dev
+```
+
+Open the local development URL displayed in the terminal.
+
+Usually:
+
+```text
+http://localhost:5173/
+```
+
+## 🎮 How to Use
+
+1. Open QuizMaster in your browser.
+2. Select the number of questions.
+3. Choose the time limit per question.
+4. Click **Start Quiz**.
+5. Read each question and select the correct answer.
+6. Receive instant feedback after selecting an answer.
+7. Complete all questions to view your results.
+8. Review your correct, incorrect, and unanswered questions.
+9. Restart the quiz to try again.
+
+## 📊 Quiz Results
+
+After completing a quiz, users can view:
+
+- **Total Score** — Number of correct answers out of total questions.
+- **Accuracy** — Percentage of questions answered correctly.
+- **Correct Answers** — Number of correctly answered questions.
+- **Incorrect Answers** — Number of incorrectly answered questions.
+- **Unanswered Questions** — Questions skipped because the timer expired.
+- **Time Taken** — Total duration of the quiz.
+- **Answer Review** — Comparison of selected and correct answers.
+
+## 🧩 Question Management
+
+Quiz questions are stored in:
+
+```text
+src/question.json
+```
+
+Example question:
+
 ```json
 {
-  "id": 101,
   "question": "Which planet is known as the Red Planet?",
-  "options": ["Venus", "Mars", "Jupiter", "Mercury"],
+  "options": [
+    "Venus",
+    "Mars",
+    "Jupiter",
+    "Mercury"
+  ],
   "answer": "Mars"
 }
 ```
-Keep the JSON valid and ensure every `answer` is exactly equal to one of its `options` values.
-💾 Score History & Privacy
-The application stores recent scores in your own browser's `localStorage` under the key `quizmaster-history`. There is no account sync or server-side storage. Browser data clearing or using a different device/browser will remove or hide that history.
-🔮 Possible Future Improvements
-Filter questions by category or difficulty.
-Add a dark/light theme toggle.
-Add keyboard shortcuts and expanded accessibility support.
-Add automated unit and UI tests.
-Refactor quiz screens into reusable components and custom hooks.
-Add a backend for user accounts, leaderboards, and synchronized results.
-👨‍💻 Author
-Developed by Danushan as a React learning and portfolio project.
+
+You can add, remove, or modify questions by editing the JSON file.
+
+Ensure that each question contains a valid question, an options array, and a matching correct answer.
+
+## 💾 Quiz History
+
+QuizMaster uses browser LocalStorage to save recent quiz results.
+
+This allows users to view their previous performance without creating an account.
+
+**Note:** Quiz history is stored locally on the current browser and device. Clearing browser storage may delete saved results.
+
+## 📱 Responsive Design
+
+QuizMaster is designed to work across different screen sizes, including:
+
+- Desktop computers
+- Laptops
+- Tablets
+- Smartphones
+
+The application includes responsive answer cards, flexible layouts, and mobile-friendly buttons.
+
+## 📦 Available Scripts
+
+| Command | Description |
+|---|---|
+| `npm run dev` | Starts the development server |
+| `npm run build` | Creates a production build |
+| `npm run preview` | Previews the production build locally |
+| `npm run lint` | Runs ESLint if configured |
+| `npm run deploy` | Deploys the production build to GitHub Pages |
+
+## 🌐 Deployment
+
+The application can be deployed using GitHub Pages, Netlify, or Vercel.
+
+### GitHub Pages
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Make sure your `vite.config.js` contains the appropriate `base` path:
+
+```javascript
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+
+export default defineConfig({
+  plugins: [react()],
+  base: "/quiz-app-react/",
+});
+```
+
+Build and deploy the project:
+
+```bash
+npm run deploy
+```
+
+Ensure the repository is configured to publish from the `gh-pages` branch.
+
+## 🔮 Future Improvements
+
+- User authentication and profiles
+- Category-based quizzes
+- Multiple difficulty levels
+- Leaderboards and rankings
+- Online multiplayer quiz mode
+- Backend integration using Node.js and Express
+- MongoDB database integration
+- Admin dashboard for managing questions
+- User performance analytics
+- Dark and light theme switching
+
+## 👨‍💻 Developed By
+
+**Sriranjan Danushan**
+
+Frontend Developer | React.js Enthusiast | Aspiring Full-Stack Developer
+
+**GitHub:** [danu-codes](https://github.com/danu-codes)
+
+**Repository:** [Quiz App React](https://github.com/danu-codes/quiz-app-react)
+
+## 📄 License
+
+This project was developed for educational purposes and React development practice.
+
 ---
-If you find the project helpful, consider giving the repository a ⭐ on GitHub.
+
+⭐ If you find this project useful, consider giving the repository a star!
+
+**Made with ❤️ using React.js and Vite.**
