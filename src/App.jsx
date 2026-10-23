@@ -1,202 +1,239 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useReducer, useRef, useState } from 'react';
+import questionsData from './question.json';
 import './App.css';
-import QuestionData from "./question.json";
 
-function App() {
-  const [startQuiz, setStartQuiz] = useState(false);
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [score, setScore] = useState(0);
-  const [showScore, setShowScore] = useState(false);
-  const [timer, setTimer] = useState(10);
-  const [questions, setQuestions] = useState([]);
-  const intervalRef = useRef(null); // track interval
-  const [userAnswers, setUserAnswers] = useState([]);
-  const [totalTime, setTotalTime] = useState(0);
+const shuffle = (items) => {
+  const copy = [...items];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+};
 
-  const shuffleQuestions = (array) => {
-    return [...array].sort(() => Math.random() - 0.5);
+const initialQuiz = {
+  phase: 'welcome', questions: [], index: 0, answers: [],
+  remaining: 10, deadline: 0, startedAt: 0, finishedAt: 0,
+  secondsPerQuestion: 10,
+};
+
+function completeQuestion(state, selected, now) {
+  if (state.phase !== 'question') return state;
+  const current = state.questions[state.index];
+  const finalSelection = now >= state.deadline ? null : selected;
+  const answer = {
+    id: current.id,
+    question: current.question,
+    correct: current.answer,
+    selected: finalSelection,
+    options: current.options,
   };
+  return { ...state, phase: 'feedback', remaining: Math.max(0, Math.ceil((state.deadline - now) / 1000)), answers: [...state.answers, answer] };
+}
 
-  // centralized function to move to next question
-  const goToNextQuestion = (current, selectedOption = null) => {
-    if (selectedOption === null) {
-      setUserAnswers((prev) => [
-        ...prev,
-        {
-          question: questions[current].question,
-          selected: "Not Answered",
-          correct: questions[current].answer,
-        },
-      ]);
+function quizReducer(state, action) {
+  switch (action.type) {
+    case 'START':
+      return {
+        ...initialQuiz,
+        phase: 'question',
+        questions: action.questions,
+        secondsPerQuestion: action.seconds,
+        remaining: action.seconds,
+        deadline: action.now + action.seconds * 1000,
+        startedAt: action.now,
+      };
+    case 'TICK': {
+      if (state.phase !== 'question') return state;
+      if (action.now >= state.deadline) return completeQuestion(state, null, action.now);
+      const remaining = Math.ceil((state.deadline - action.now) / 1000);
+      return remaining === state.remaining ? state : { ...state, remaining };
     }
-
-    if (current < questions.length - 1) {
-      setCurrentQuestion(current + 1);
-    } else {
-      setShowScore(true);
+    case 'ANSWER':
+      return completeQuestion(state, action.selected, action.now);
+    case 'NEXT': {
+      if (state.phase !== 'feedback') return state;
+      if (state.index === state.questions.length - 1) {
+        return { ...state, phase: 'results', finishedAt: action.now };
+      }
+      return {
+        ...state,
+        phase: 'question',
+        index: state.index + 1,
+        remaining: state.secondsPerQuestion,
+        deadline: action.now + state.secondsPerQuestion * 1000,
+      };
     }
+    case 'HOME': return initialQuiz;
+    default: return state;
+  }
+}
 
-    setTimer(10);
-  };
+function loadHistory() {
+  try {
+    const value = JSON.parse(localStorage.getItem('quizmaster-history') || '[]');
+    return Array.isArray(value) ? value : [];
+  } catch {
+    return [];
+  }
+}
 
-  // Timer logic
+export default function App() {
+  const [quiz, dispatch] = useReducer(quizReducer, initialQuiz);
+  const [count, setCount] = useState(10);
+  const [seconds, setSeconds] = useState(10);
+  const [history, setHistory] = useState(loadHistory);
+  const savedRun = useRef(null);
+
   useEffect(() => {
-    if (showScore || !startQuiz || questions.length === 0) return;
-
-    // Clear any existing interval before starting new one
-    if (intervalRef.current) clearInterval(intervalRef.current);
-
-    setTimer(10); // reset timer on question change
-
-    intervalRef.current = setInterval(() => {
-      setTimer((prev) => {
-        if (prev <= 1) {
-          clearInterval(intervalRef.current); // stop interval
-          goToNextQuestion(currentQuestion, null);  // use current value directly
-          return 10;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-
-    return () => clearInterval(intervalRef.current);
-
-  }, [showScore, startQuiz, questions.length, currentQuestion]);
+    if (quiz.phase !== 'question') return undefined;
+    const id = window.setInterval(() => dispatch({ type: 'TICK', now: Date.now() }), 100);
+    return () => window.clearInterval(id);
+  }, [quiz.phase, quiz.index]);
 
   useEffect(() => {
-    let timerInterval;
+    if (quiz.phase !== 'feedback') return undefined;
+    const id = window.setTimeout(() => dispatch({ type: 'NEXT', now: Date.now() }), 950);
+    return () => window.clearTimeout(id);
+  }, [quiz.phase, quiz.index]);
 
-    if (startQuiz && !showScore) {
-      timerInterval = setInterval(() => {
-        setTotalTime((prev) => prev + 1);
-      }, 1000);
-    }
+  const correctCount = quiz.answers.filter((item) => item.selected === item.correct).length;
+  const unansweredCount = quiz.answers.filter((item) => item.selected === null).length;
+  const incorrectCount = quiz.answers.length - correctCount - unansweredCount;
+  const percentage = quiz.questions.length ? Math.round((correctCount / quiz.questions.length) * 100) : 0;
+  const elapsedSeconds = Math.max(0, Math.round((quiz.finishedAt - quiz.startedAt) / 1000));
 
-    return () => clearInterval(timerInterval);
-  }, [startQuiz, showScore]);
+  useEffect(() => {
+    if (quiz.phase !== 'results' || savedRun.current === quiz.startedAt) return;
+    savedRun.current = quiz.startedAt;
+    const record = {
+      id: quiz.startedAt,
+      date: new Date(quiz.startedAt).toISOString(),
+      correct: correctCount,
+      total: quiz.questions.length,
+      percentage,
+    };
+    const next = [record, ...loadHistory()].slice(0, 8);
+    try { localStorage.setItem('quizmaster-history', JSON.stringify(next)); } catch { /* storage disabled */ }
+    setHistory(next);
+  }, [quiz.phase, quiz.startedAt, quiz.questions.length, correctCount, percentage]);
 
-  const handleStartQuiz = () => {
-    const shuffled = shuffleQuestions(QuestionData).slice(0, 10);
-    setQuestions(shuffled);
-    setStartQuiz(true);
-    setCurrentQuestion(0);
-    setScore(0);
-    setShowScore(false);
-    setTimer(10);
-    setUserAnswers([]);
-    setTotalTime(0);
-  };
+  function startQuiz() {
+    const selected = shuffle(questionsData).slice(0, Math.min(count, questionsData.length));
+    savedRun.current = null;
+    dispatch({ type: 'START', questions: selected, seconds, now: Date.now() });
+  }
 
-  const handleAnswerClick = (selectedOption) => {
-    if (intervalRef.current) clearInterval(intervalRef.current);
-
-    setUserAnswers((prev) => [
-      ...prev,
-      {
-        question: questions[currentQuestion].question,
-        selected: selectedOption,
-        correct: questions[currentQuestion].answer,
-      },
-    ]);
-
-    if (selectedOption === questions[currentQuestion].answer) {
-      setScore((prev) => prev + 1);
-    }
-
-    goToNextQuestion(currentQuestion, selectedOption);
-  };
-
-  const handleRestartQuiz = () => {
-    const shuffled = shuffleQuestions(QuestionData).slice(0, 10);
-    setQuestions(shuffled);
-    setStartQuiz(true);
-    setCurrentQuestion(0);
-    setScore(0);
-    setShowScore(false);
-    setTimer(10);
-    setUserAnswers([]);
-    setTotalTime(0);
-  };
+  const question = quiz.questions[quiz.index];
+  const latestAnswer = quiz.answers[quiz.answers.length - 1];
+  const progress = quiz.questions.length ? ((quiz.index + (quiz.phase === 'feedback' ? 1 : 0)) / quiz.questions.length) * 100 : 0;
 
   return (
-    <div className="quiz-app">
-      {!startQuiz ? (
-        <div className="start-section">
-          <h1>Quiz App</h1>
-          <button className="start-btn" onClick={handleStartQuiz}>Start Now</button>
-        </div>
+    <div className="app-shell">
+      <header className="site-header">
+        <button className="brand" type="button" onClick={() => dispatch({ type: 'HOME' })} aria-label="Go to home">✦ <span>QuizMaster</span></button>
+        <span className="header-pill">Think • Learn • Grow</span>
+      </header>
 
-      ) : showScore ? (
-        <div className="score-section">
-          <h2>Quiz Completed 🎉</h2>
-
-          <h3>
-            Score: {score}/{questions.length}
-          </h3>
-
-          <p>
-            Correct Answers: {score}
-          </p>
-
-          <p>
-            Wrong Answers: {questions.length - score}
-          </p>
-
-          <p>
-            Accuracy: {((score / questions.length) * 100).toFixed(0)}%
-          </p>
-
-          <p>
-            Time Taken: {Math.floor(totalTime / 60)}m {totalTime % 60}s
-          </p>
-
-          <div className="review-section">
-            <h3>Answer Review</h3>
-
-            {userAnswers.map((item, index) => (
-              <div
-                key={index}
-                className={`review-card ${item.selected === item.correct
-                    ? "correct"
-                    : "wrong"
-                  }`}
-              >
-                <p>
-                  <strong>Q{index + 1}:</strong> {item.question}
-                </p>
-
-                <p>
-                  <strong>Your Answer:</strong> {item.selected}
-                </p>
-
-                <p>
-                  <strong>Correct Answer:</strong> {item.correct}
-                </p>
+      <main className="main-content">
+        {quiz.phase === 'welcome' && (
+          <section className="panel welcome-panel" aria-labelledby="welcome-title">
+            <span className="eyebrow">YOUR DAILY BRAIN BOOST</span>
+            <div className="hero-icon" aria-hidden="true">🧠</div>
+            <h1 id="welcome-title">Ready to challenge your mind?</h1>
+            <p className="muted hero-copy">Answer fun general knowledge questions, race against the clock, and see how much you know.</p>
+            <div className="settings-grid">
+              <label className="field">Questions
+                <select value={count} onChange={(e) => setCount(Number(e.target.value))}>
+                  {[5, 10, 15, 20].filter((n) => n <= questionsData.length).map((n) => <option key={n} value={n}>{n} questions</option>)}
+                </select>
+              </label>
+              <label className="field">Time per question
+                <select value={seconds} onChange={(e) => setSeconds(Number(e.target.value))}>
+                  {[10, 15, 20, 30].map((n) => <option key={n} value={n}>{n} seconds</option>)}
+                </select>
+              </label>
+            </div>
+            <button className="primary-btn" onClick={startQuiz}>Start Quiz <span aria-hidden="true">→</span></button>
+            {history.length > 0 && (
+              <div className="history-section">
+                <h2>Recent attempts</h2>
+                {history.slice(0, 3).map((item) => (
+                  <div className="history-item" key={item.id}>
+                    <span>{new Date(item.date).toLocaleDateString()}</span>
+                    <strong>{item.correct}/{item.total} • {item.percentage}%</strong>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            )}
+          </section>
+        )}
 
-          <button onClick={handleRestartQuiz}>
-            Restart Quiz
-          </button>
-        </div>
+        {(quiz.phase === 'question' || quiz.phase === 'feedback') && question && (
+          <section className="panel question-panel" aria-labelledby="question-title">
+            <div className="question-header">
+              <span className="eyebrow">QUESTION {quiz.index + 1} OF {quiz.questions.length}</span>
+              <span className={`timer-pill ${quiz.remaining <= 3 ? 'timer-urgent' : ''}`} role="timer" aria-label={`${quiz.remaining} seconds remaining`}>◷ {quiz.remaining}s</span>
+            </div>
+            <div className="progress-track" role="progressbar" aria-valuenow={Math.round(progress)} aria-valuemin="0" aria-valuemax="100" aria-label="Quiz progress"><div className="progress-fill" style={{ width: `${progress}%` }} /></div>
+            <h1 id="question-title">{question.question}</h1>
+            <div className="answers-grid">
+              {question.options.map((option, index) => {
+                const isCorrect = quiz.phase === 'feedback' && option === question.answer;
+                const isWrong = quiz.phase === 'feedback' && option === latestAnswer?.selected && option !== question.answer;
+                return (
+                  <button
+                    key={`${question.id}-${index}`}
+                    type="button"
+                    className={`answer-option ${isCorrect ? 'answer-correct' : ''} ${isWrong ? 'answer-wrong' : ''}`}
+                    onClick={() => dispatch({ type: 'ANSWER', selected: option, now: Date.now() })}
+                    disabled={quiz.phase !== 'question'}
+                  >
+                    <span className="option-letter">{String.fromCharCode(65 + index)}</span>
+                    <span className="option-text">{option}</span>
+                    {isCorrect && <span className="answer-mark" aria-label="Correct">✓</span>}
+                    {isWrong && <span className="answer-mark" aria-label="Incorrect">✕</span>}
+                  </button>
+                );
+              })}
+            </div>
+            <p className="question-footer" aria-live="polite">
+              {quiz.phase === 'feedback' ? (latestAnswer?.selected === null ? 'Time is up! Moving to the next question…' : latestAnswer?.selected === latestAnswer?.correct ? 'Correct! Great job.' : 'Not quite! Check the correct answer.') : 'Choose the best answer before time runs out.'}
+            </p>
+          </section>
+        )}
 
-      ) : questions.length > 0 && (
-        <div className="question-section">
-          <h2>Question {currentQuestion + 1}</h2>
-          <p>{questions[currentQuestion].question}</p>
-          <div className="options">
-            {questions[currentQuestion].options.map((option, index) => (
-              <button key={index} onClick={() => handleAnswerClick(option)}>
-                {option}
-              </button>
-            ))}
-          </div>
-          <div className="timer">Time left: {timer}s</div>
-        </div>
-      )}
+        {quiz.phase === 'results' && (
+          <section className="panel results-panel" aria-labelledby="results-title">
+            <span className="eyebrow">QUIZ COMPLETE</span>
+            <h1 id="results-title">{percentage >= 80 ? 'Amazing work! 🎉' : percentage >= 50 ? 'Nice effort! 🌟' : 'Keep practicing! 💪'}</h1>
+            <p className="muted">Here is how you performed this round.</p>
+            <div className="score-ring" style={{ '--score': `${percentage}%` }} role="img" aria-label={`Score ${percentage} percent`}><div><strong>{percentage}%</strong><span>Accuracy</span></div></div>
+            <div className="stats-grid">
+              <div className="stat correct-stat"><strong>{correctCount}</strong><span>Correct</span></div>
+              <div className="stat wrong-stat"><strong>{incorrectCount}</strong><span>Incorrect</span></div>
+              <div className="stat skipped-stat"><strong>{unansweredCount}</strong><span>Timed out</span></div>
+            </div>
+            <p className="time-summary">Completed {quiz.questions.length} questions in {Math.floor(elapsedSeconds / 60)}m {elapsedSeconds % 60}s</p>
+            <div className="results-actions"><button className="primary-btn" onClick={startQuiz}>Try Again ↻</button><button className="secondary-btn" onClick={() => dispatch({ type: 'HOME' })}>Home</button></div>
+            <section className="review-section" aria-labelledby="review-title">
+              <h2 id="review-title">Answer review</h2>
+              {quiz.answers.map((answer, index) => {
+                const correct = answer.selected === answer.correct;
+                return (
+                  <article className={`review-card ${correct ? 'review-correct' : 'review-wrong'}`} key={`${answer.id}-${index}`}>
+                    <div className="review-heading"><span>Question {index + 1}</span><strong>{correct ? '✓ Correct' : answer.selected === null ? '◷ Timed out' : '✕ Incorrect'}</strong></div>
+                    <h3>{answer.question}</h3>
+                    <p>Your answer: <strong>{answer.selected ?? 'Not answered'}</strong></p>
+                    {!correct && <p>Correct answer: <strong>{answer.correct}</strong></p>}
+                  </article>
+                );
+              })}
+            </section>
+          </section>
+        )}
+      </main>
+      <footer className="site-footer">Made for curious minds ✨</footer>
     </div>
   );
 }
-
-export default App;
